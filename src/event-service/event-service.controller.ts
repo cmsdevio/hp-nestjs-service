@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { EventServiceService } from './event-service.service';
+import { MockAdvisoriesConfigDto } from './dtos/mock-advisories-config.dto';
 
 @Controller('events')
 export class EventServiceController {
@@ -10,9 +11,9 @@ export class EventServiceController {
     console.log(body);
   }
 
-  @Get('/load')
-  async loadMockAdvisories() {
-    const response = await this.eventService.loadMockAdvisories();
+  @Post('/load')
+  async loadMockAdvisories(@Body() mockAdvisoriesConfigDto: MockAdvisoriesConfigDto) {
+    const response = await this.eventService.loadMockAdvisories(mockAdvisoriesConfigDto);
     console.log(response);
   }
 }
